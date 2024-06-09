@@ -40,7 +40,7 @@ wm.config = {
 	'layerDefaults': {
 		'width': 30,
 		'height': 20,
-		'tilesize': 8
+		'tilesize': 64
 	},
 	
 	// Whether to ask before closing Weltmeister when there are unsaved changes

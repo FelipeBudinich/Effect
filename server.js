@@ -1,19 +1,45 @@
 import express from 'express';
 import path from 'path';
-import fs from 'fs/promises'; 
+import fs from 'fs/promises';
+import { exec } from 'child_process'; 
 import { glob } from 'glob';
 import { outputFile } from './tools/fs-utils.js';
 
 const app = express();
 const port = 3000;
 const root = path.resolve(process.cwd(), 'public');
+const toolsRoot = path.resolve(process.cwd(), 'tools');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+const runLoadEntities = () => {
+    return new Promise((resolve, reject) => {
+        exec('node tools/loadEntities.js', (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            } else if (stderr) {
+                reject(new Error(stderr));
+            } else {
+                resolve(stdout);
+            }
+        });
+    });
+};
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(root, 'index.html'));
+});
+
+app.get(['/editor', '/weltmeister.html'], async (req, res) => {
+    try {
+        await runLoadEntities();
+        res.sendFile(path.join(toolsRoot, 'weltmeister.html'));
+    } catch (error) {
+        console.error('Error loading entities:', error);
+        res.status(500).send('Error loading entities');
+    }
 });
 
 app.get('/api/glob', async (req, res) => {
