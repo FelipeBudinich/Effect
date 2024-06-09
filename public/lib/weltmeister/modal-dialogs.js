@@ -91,7 +91,7 @@ wm.ModalDialogPathSelect = wm.ModalDialog.extend({
 	
 	initDialog: function() {
 		this.parent();
-		this.pathInput = $('<input/>', {'type': 'text', 'class': 'modalDialogPath'} );
+		this.pathInput = $('<input/>', {'type': 'text', 'class': 'modalDialogPath', 'name':'modalDialog'} );
 		this.buttonDiv.before( this.pathInput );
 		this.pathDropdown = new wm.SelectFileDropdown( this.pathInput, wm.config.api.browse, this.fileType );
 	},
