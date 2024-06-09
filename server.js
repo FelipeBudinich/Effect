@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs/promises'; 
 import { glob } from 'glob';
 import { outputFile } from './tools/fs-utils.js';
 
@@ -49,6 +50,47 @@ app.post('/api/save', async (req, res) => {
     } catch (err) {
         console.error('Error writing to file:', err);
         res.send({ error: 2, msg: 'Couldn\'t write to file: ' + reqPath });
+    }
+});
+
+app.get('/api/browse', async (req, res) => {
+    const dir = req.query.dir || '';
+    const type = req.query.type;
+    const types = { scripts: ['.js'], images: ['.png', '.gif', '.jpg', '.jpeg'] };
+    const result = { dirs: [], files: [] };
+
+    const filter = (type && types[type]) ? types[type] : false;
+
+    result.parent = dir ? dir.substring(0, dir.lastIndexOf('/')) : false;
+
+    let normalizedDir = dir.endsWith('/') ? dir.slice(0, -1) : dir;
+    normalizedDir += '/';
+
+    const dirpath = path.normalize(path.join(root, normalizedDir));
+
+    try {
+        const files = await fs.readdir(dirpath);
+        for (const file of files) {
+            const resPath = (normalizedDir !== '/' ? normalizedDir : '') + file;
+            const stats = await fs.stat(path.join(dirpath, file));
+
+            if (stats.isDirectory()) {
+                result.dirs.push(resPath);
+            } else if (stats.isFile()) {
+                if (filter) {
+                    if (filter.includes(path.extname(file))) {
+                        result.files.push(resPath);
+                    }
+                } else {
+                    result.files.push(resPath);
+                }
+            }
+        }
+
+        res.send(result);
+    } catch (err) {
+        console.error('Error reading directory:', err);
+        res.status(500).send('Internal Server Error');
     }
 });
 
