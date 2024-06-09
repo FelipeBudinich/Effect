@@ -3,7 +3,8 @@ ig.module(
 )
 .requires(
 	'impact.game',
-	'impact.font'
+	'impact.font',
+	'game.entities.trigger'
 )
 .defines(function(){
 
@@ -15,6 +16,7 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
+		ig.log('test baker');
 	},
 	
 	update: function() {
