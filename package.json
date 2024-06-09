@@ -7,9 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "node server.js",
-    "bake": "node tools/baker.js",
-    "load-entities": "node tools/loadEntities.js"
+    "start": "node server.js"
   },
   "keywords": [
     "game",

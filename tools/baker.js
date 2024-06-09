@@ -67,5 +67,3 @@ async function runBake() {
 }
 
 runBake();
-
-export default Baker;

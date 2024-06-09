@@ -28,11 +28,45 @@ const runLoadEntities = () => {
     });
 };
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(root, 'index.html'));
+const runCreateDebug = () => {
+    return new Promise((resolve, reject) => {
+        exec('node tools/createDebug.js', (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            } else if (stderr) {
+                reject(new Error(stderr));
+            } else {
+                resolve(stdout);
+            }
+        });
+    });
+};
+
+const runBaker = () => {
+    return new Promise((resolve, reject) => {
+        exec('node tools/baker.js', (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            } else if (stderr) {
+                reject(new Error(stderr));
+            } else {
+                resolve(stdout);
+            }
+        });
+    });
+};
+
+app.get('/release', async (req, res) => {
+    try {
+        await runBaker();
+        res.sendFile(path.join(toolsRoot, 'release.html'));
+    } catch (error) {
+        console.error('Error during baking:', error);
+        res.status(500).send('Error during baking');
+    }
 });
 
-app.get(['/editor', '/weltmeister.html'], async (req, res) => {
+app.get('/editor', async (req, res) => {
     try {
         await runLoadEntities();
         res.sendFile(path.join(toolsRoot, 'weltmeister.html'));
@@ -41,6 +75,22 @@ app.get(['/editor', '/weltmeister.html'], async (req, res) => {
         res.status(500).send('Error loading entities');
     }
 });
+
+app.get('/debug', async (req, res) => {
+    try {
+        await runCreateDebug();
+        res.sendFile(path.join(toolsRoot, 'debug.html'));
+    } catch (error) {
+        console.error('Error creating debug module:', error);
+        res.status(500).send('Error creating debug module');
+    }
+});
+
+app.get('/', async (req, res) => {
+    res.sendFile(path.join(toolsRoot, 'dev.html'));
+});
+
+
 
 app.get('/api/glob', async (req, res) => {
     try {

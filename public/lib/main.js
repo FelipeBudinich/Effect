@@ -16,7 +16,6 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
-		ig.log('test baker');
 	},
 	
 	update: function() {
