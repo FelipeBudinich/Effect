@@ -1,4 +1,4 @@
-// tools/fs-utils.js
+//tools/fs-utils.js
 'use strict';
 
 import fs from 'fs';
