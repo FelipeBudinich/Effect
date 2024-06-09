@@ -1,0 +1,17 @@
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+
+# Editor directories and files
+.vscode/
+
+# Optional npm cache directory
+.npm/
+
+# macOS specific
+.DS_Store
+
+# Optional REPL history
+.node_repl_history
