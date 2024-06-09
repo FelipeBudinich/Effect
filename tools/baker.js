@@ -1,7 +1,7 @@
 // tools/baker.js
 'use strict';
 
-import { readFile, writeFile } from './fs-utils.js';
+import { readFile, outputFile } from './fs-utils.js';
 import { minify } from 'terser';
 
 class Baker {
@@ -25,7 +25,7 @@ class Baker {
       const minified = await minify(output, {
         compress: {
           drop_console: true,
-          pure_funcs: ['ig.log','ig.assert','ig.show','ig.mark','console.log', 'console.info', 'console.debug', 'console.warn'],
+          pure_funcs: ['ig.log', 'ig.assert', 'ig.show', 'ig.mark', 'console.log', 'console.info', 'console.debug', 'console.warn'],
           passes: 3
         },
         mangle: {
@@ -39,7 +39,7 @@ class Baker {
 
       const finalOutput = `//https://github.com/FelipeBudinich/Effect.git\n${minified.code}`;
 
-      await writeFile(outFile, finalOutput);
+      await outputFile(outFile, finalOutput);
 
       const originalSize = Buffer.byteLength(output, 'utf8');
       const minifiedSize = Buffer.byteLength(finalOutput, 'utf8');
