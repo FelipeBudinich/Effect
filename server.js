@@ -87,7 +87,7 @@ app.get('/debug', async (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-    res.sendFile(path.join(toolsRoot, 'dev.html'));
+    res.sendFile(path.join(toolsRoot, 'development.html'));
 });
 
 
