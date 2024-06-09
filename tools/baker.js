@@ -1,19 +1,16 @@
-// tools/baker.js
+//tools/baker.js
 'use strict';
 
 import { readFile, outputFile } from './fs-utils.js';
 import { minify } from 'terser';
 
 class Baker {
-  constructor(base = '') {
-    this.base = base;
-  }
 
   async bake(inFiles, outFile) {
     let output = '';
     for (const file of inFiles) {
       try {
-        const code = await readFile(this.base + file, 'utf8');
+        const code = await readFile(file, 'utf8');
         output += code;
       } catch (err) {
         console.error(`ERROR: Couldn't load ${file}`, err);
