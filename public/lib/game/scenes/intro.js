@@ -3,6 +3,7 @@ ig.module(
 )
 .requires(
 	'impact.game',
+    'impact.timer',
     'impact.font'
 )
 .defines(function(){
@@ -11,16 +12,23 @@ ig.module(
 	ig.IntroScene = ig.Game.extend({
 		// Load a font
 		font: new ig.Font('media/04b03.font.png'),
+        timer: new ig.Timer(),
+        // We'll set the value of this.message from main.js when we set ig.IntroScene as the active scene.
 		message: '',
 		
 		init: function() {
 			// Initialize the scene here.
+            // We'll set the timer to count 5 seconds
+            this.timer.set(5);
 		},
 		
 		update: function() {
 			// Update all entities and backgroundMaps
 			this.parent();
-			// Add your own, additional update code here
+			// If the timer has elapsed then switch the scene
+            if (this.timer.delta() >= 0){
+                ig.scene.set(ig.DemoScene, {message: "We passed data to the intro scene"});
+            }
 		},
 		
 		draw: function() {
@@ -32,6 +40,7 @@ ig.module(
 				y = ig.system.height / 2;
 			
 			this.font.draw(this.message, x, y, ig.Font.ALIGN.CENTER);
+            this.font.draw(this.timer.delta().floor(), x, y +16, ig.Font.ALIGN.CENTER);
 		}
 	});
 });
