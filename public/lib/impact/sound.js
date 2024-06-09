@@ -8,49 +8,53 @@ ig.SoundManager = ig.Class.extend({
 	volume: 1,
 	format: null,
 	
-	init: function() {
-		// Quick sanity check if the Browser supports the Audio tag
-		if( !ig.Sound.enabled || !window.Audio ) {
-			ig.Sound.enabled = false;
-			return;
-		}
-		
-		// Probe sound formats and determine the file extension to load
-		var probe = new Audio();
-		for( var i = 0; i < ig.Sound.use.length; i++ ) {
-			var format = ig.Sound.use[i];
-			if( probe.canPlayType(format.mime) ) {
-				this.format = format;
-				break;
-			}
-		}
-		
-		// No compatible format found? -> Disable sound
-		if( !this.format ) {
-			ig.Sound.enabled = false;
-		}
+    init: function() {
+        // Quick sanity check if the Browser supports the Audio tag
+        if( !ig.Sound.enabled || !window.Audio ) {
+            ig.Sound.enabled = false;
+            return;
+        }
+        
+        // Probe sound formats and determine the file extension to load
+        var probe = new Audio();
+        for( var i = 0; i < ig.Sound.use.length; i++ ) {
+            var format = ig.Sound.use[i];
+            if( probe.canPlayType(format.mime) ) {
+                this.format = format;
+                break;
+            }
+        }
+        
+        // No compatible format found? -> Disable sound
+        if( !this.format ) {
+            ig.Sound.enabled = false;
+        }
 
-		// Create WebAudio Context
-		if( ig.Sound.enabled && ig.Sound.useWebAudio ) {
-			this.audioContext = new AudioContext();
-			this.boundWebAudioUnlock = this.unlockWebAudio.bind(this);
-			ig.system.canvas.addEventListener('touchstart', this.boundWebAudioUnlock, false);
-			ig.system.canvas.addEventListener('mousedown', this.boundWebAudioUnlock, false);
-		}
-	},
+        // Setup WebAudio unlock on user interaction
+        if( ig.Sound.enabled && ig.Sound.useWebAudio ) {
+            this.boundWebAudioUnlock = this.unlockWebAudio.bind(this);
+            ig.system.canvas.addEventListener('touchstart', this.boundWebAudioUnlock, false);
+            ig.system.canvas.addEventListener('mousedown', this.boundWebAudioUnlock, false);
+        }
+    },
 	
-	unlockWebAudio: function() {
-		ig.system.canvas.removeEventListener('touchstart', this.boundWebAudioUnlock, false);
-		ig.system.canvas.removeEventListener('mousedown', this.boundWebAudioUnlock, false);
-		
-		// create empty buffer
-		var buffer = this.audioContext.createBuffer(1, 1, 22050);
-		var source = this.audioContext.createBufferSource();
-		source.buffer = buffer;
+    unlockWebAudio: function() {
+        if (!this.audioContext) {
+            this.audioContext = new AudioContext();
 
-		source.connect(this.audioContext.destination);
-		source.start(0);
-	},
+            this.audioContext.resume().then(() => {
+                var buffer = this.audioContext.createBuffer(1, 1, 22050);
+                var source = this.audioContext.createBufferSource();
+                source.buffer = buffer;
+
+                source.connect(this.audioContext.destination);
+                source.start(0);
+            });
+        }
+        
+        ig.system.canvas.removeEventListener('touchstart', this.boundWebAudioUnlock, false);
+        ig.system.canvas.removeEventListener('mousedown', this.boundWebAudioUnlock, false);
+    },
 
 	load: function( path, multiChannel, loadCallback ) {
 		if( multiChannel && ig.Sound.useWebAudio ) {
