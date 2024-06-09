@@ -118,9 +118,9 @@ wm.config = {
 	// different backend (i.e. not the official PHP backend), you may have
 	// to change these.
 	'api': {
-		'save': 'lib/weltmeister/api/save.php',
-		'browse': 'lib/weltmeister/api/browse.php',
-		'glob': 'lib/weltmeister/api/glob.php'
+		'save': 'api/save',
+		'browse': 'api/browse',
+		'glob': 'api/glob'
 	}
 };
 
