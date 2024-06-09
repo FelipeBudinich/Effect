@@ -1,4 +1,4 @@
-//tools/fs-utils.js
+// tools/fs-utils.js
 'use strict';
 
 import fs from 'fs';
@@ -11,6 +11,10 @@ const copyFile = promisify(fs.copyFile);
 const mkdir = promisify(fs.mkdir);
 const stat = promisify(fs.stat);
 
+const mkdirs = async (dirPath) => {
+  await mkdir(dirPath, { recursive: true });
+};
+
 const outputFile = async (filePath, data, options) => {
   const dir = path.dirname(filePath);
 
@@ -18,17 +22,13 @@ const outputFile = async (filePath, data, options) => {
     await stat(dir);
   } catch (err) {
     if (err.code === 'ENOENT') {
-      await mkdir(dir, { recursive: true });
+      await mkdirs(dir);
     } else {
       throw err;
     }
   }
 
   await writeFile(filePath, data, options);
-};
-
-const mkdirs = async (dirPath) => {
-  await mkdir(dirPath, { recursive: true });
 };
 
 export {
@@ -39,4 +39,3 @@ export {
   outputFile,
   mkdirs
 };
-
