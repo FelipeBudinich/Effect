@@ -71,9 +71,7 @@ wm.config = {
 		'C': 'clone',
 		'Z': 'undo',
 		'Y': 'redo',
-		'MWHEEL_UP': 'zoomin',
 		'PLUS': 'zoomin',
-		'MWHEEL_DOWN': 'zoomout',
 		'MINUS': 'zoomout'
 	},
 
@@ -115,8 +113,7 @@ wm.config = {
 	},
 	
 	// API paths for saving levels and browsing directories. If you use a
-	// different backend (i.e. not the official PHP backend), you may have
-	// to change these.
+	// different backend you may have to change these.
 	'api': {
 		'save': 'api/save',
 		'browse': 'api/browse',

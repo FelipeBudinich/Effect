@@ -315,7 +315,7 @@ wm.Weltmeister = ig.Class.extend({
 		var req = $.ajax({
 			url:( path + '?nocache=' + Math.random() ), 
 			dataType: 'text',
-			async:false,
+			async:true,
 			success: this.loadResponse.bind(this),
 			error: function() { $.cookie( 'wmLastLevel', null ); }
 		});
@@ -463,7 +463,7 @@ wm.Weltmeister = ig.Class.extend({
 			url: wm.config.api.save,
 			type: 'POST',
 			dataType: 'json',
-			async: false,
+			async: true,
 			data: postString,
 			success:this.saveResponse.bind(this)
 		});

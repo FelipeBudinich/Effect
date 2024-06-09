@@ -31,7 +31,7 @@ wm.SelectFileDropdown = ig.Class.extend({
 		var req = $.ajax({
 			url:path, 
 			dataType: 'json',
-			async: false,
+			async: true,
 			success:this.showFiles.bind(this)
 		});
 	},

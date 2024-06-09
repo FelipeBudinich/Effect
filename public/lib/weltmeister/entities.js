@@ -27,8 +27,8 @@ var req = $.ajax({
 	// can't resolve dependencies to weltmeister.entities when there are
 	// no more files to load and weltmeister.entities is still not defined
 	// because the ajax request hasn't finished yet.
-	// FIXME FFS!
-	async: false, 
+	// Fixed?
+	async: true, 
 	success: function(files) {
 		
 		// File names to Module names
@@ -49,7 +49,7 @@ var req = $.ajax({
 	},
 	error: function( xhr, status, error ){
 		throw( 
-			"Failed to load entity list via glob.php: " + error + "\n" +
+			"Failed to load entity list via glob: " + error + "\n" +
 			xhr.responseText
 		);
 	}
