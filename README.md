@@ -1,6 +1,6 @@
-# Impact
+# Effect
 
-Impact is an HTML5 Game Engine. More info & documentation: http://impactjs.com/
+Effect is a fork of Impact, an HTML5 Game Engine. More info & documentation: http://impactjs.com/
 
 Various example games to get you started are available on http://impactjs.com/download
 

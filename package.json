@@ -1,7 +1,7 @@
 {
   "name": "effect",
   "version": "1.24.0",
-  "description": "Effect is a fork of Impact an HTML5 Game Engine. More info & documentation: http://impactjs.com/",
+  "description": "Effect is a fork of Impact, an HTML5 Game Engine. More info & documentation: http://impactjs.com/",
   "main": "server.js",
   "directories": {
     "lib": "lib"

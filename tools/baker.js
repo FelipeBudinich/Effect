@@ -10,7 +10,7 @@ class Baker {
   }
 
   async bake(inFiles, outFile) {
-    let output = '/*! Built with IMPACT - impactjs.com */\n\n';
+    let output = '/*! Built with Effect - https://github.com/FelipeBudinich/Effect.git */\n\n';
     for (const file of inFiles) {
       try {
         const code = await readFile(this.base + file, 'utf8');
