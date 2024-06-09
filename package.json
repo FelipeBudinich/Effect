@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "bake": "node tools/baker.js"
   },
   "keywords": [
     "game",
@@ -21,7 +22,9 @@
     "type": "git",
     "url": "https://github.com/FelipeBudinich/Effect.git"
   },
+  "type": "module",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "terser": "^5.31.1"
   }
 }
