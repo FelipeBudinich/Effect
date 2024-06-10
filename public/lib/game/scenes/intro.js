@@ -18,16 +18,16 @@ ig.module(
 		
 		init: function() {
 			// Initialize the scene here.
-            // We'll set the timer to count 5 seconds
-            this.timer.set(5);
+            // We'll set the timer to count 10 seconds
+            this.timer.set(10);
 		},
 		
 		update: function() {
 			// Update all entities and backgroundMaps
 			this.parent();
 			// If the timer has elapsed then switch the scene
-            if (this.timer.delta() >= 0){
-                ig.scene.set(ig.DemoScene, {message: "We passed data to the intro scene"});
+            if (this.timer.delta() >= 0 || ig.input.pressed('action')){
+                ig.scene.set(ig.FirstDemoTweenScene);
             }
 		},
 		
@@ -39,7 +39,7 @@ ig.module(
 			var x = ig.system.width / 2,
 				y = ig.system.height / 2;
 			
-			this.font.draw(this.message, x, y, ig.Font.ALIGN.CENTER);
+			this.font.draw(this.message, x, y - 16, ig.Font.ALIGN.CENTER);
             this.font.draw(this.timer.delta().floor(), x, y +16, ig.Font.ALIGN.CENTER);
 		}
 	});

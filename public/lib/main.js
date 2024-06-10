@@ -5,7 +5,6 @@ ig.module(
 	'impact.game',
 	'impact.font',
 	'game.scenes',
-	'game.scenes.manager', 
 	'game.entities.trigger'
 )
 .defines(function(){
@@ -14,11 +13,16 @@ ig.Main = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
+		ig.input.bind( ig.KEY.MOUSE1, 'action' );
+		ig.input.bind( ig.KEY.Z, 'action' );
 	},
 	
 	run: function() {
 		// Then we go to ig.IntroScene and pass an object to it
-		ig.scene.set(ig.IntroScene, {message: "We passed data to the intro scene"});
+		ig.scene.set(ig.IntroScene, 
+			{
+				message: "We passed data to the intro scene\nWait, click, tap or press z to skip"
+			});
 	}
 });
 
