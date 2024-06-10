@@ -4,7 +4,7 @@ ig.module(
 .requires(
     'impact.game',
     'impact.font',
-    'impact.tween' // Ensure tween is included
+    'impact.tween'
 )
 .defines(function(){
     'use strict';
@@ -14,75 +14,68 @@ ig.module(
         // Load a font
         font: new ig.Font('media/04b03.font.png'),
         
-        // Initialize tween array
+        header: '1/x',
+        texts: [                
+            'linear',
+            'sinusoidalIn',
+            'quadraticIn',
+            'cubicIn',
+            'quarticIn',
+            'quinticIn',
+            'exponentialIn',
+            'circularIn'
+        ],
         tweens: [],
         oPositions: [],
 
         init: function() {
-            var screenHeight = ig.system.height;
-            var sectionHeight = screenHeight / 5;
-            var oXStart = (ig.system.width / 12 ) +24;
-            var oXEnd = ((ig.system.width / 12)*11) - 24;
 
-            // Texts for each section
-            this.texts = [
-                'Quadratic In',
-                'Quadratic Out',
-                'Quadratic InOut',
-                'Reference - Linear',
-            ];
+            this.sectionHeight = ig.system.height / 12;
 
-            var easingFunctions = [
-                ig.Tween.ease.quadraticIn,
-                ig.Tween.ease.quadraticOut,
-                ig.Tween.ease.quadraticInOut,
-                ig.Tween.ease.linear
-            ];
+            let start = (ig.system.width / 12 ) + 24;
+            let end = ((ig.system.width / 12) * 11) - 24;
+            let duration = 3;
+            let mode = 'oscillate';
 
-            // Initialize tweens and positions
-            for (var i = 0; i < this.texts.length; i++) {
-                var y = (i + 1) * sectionHeight - 16 + 12;  // y position for "O"
-                this.oPositions.push(oXStart);
+            this.initTweens(start, end, duration, mode)
+        },
 
-                // Create a new tween
-                let tween = new ig.Tween(oXStart, oXEnd, 3, easingFunctions[i], 'oscillate');
-
-                // Push the newly created tween to the tweens array
+        initTweens: function(start, end, duration, mode){
+            for (let i = 0; i < this.texts.length; i++) {
+                let y = (i + 1) * this.sectionHeight;
+                this.oPositions.push(start);
+                let tween = new ig.Tween(start, end, duration, ig.Tween.ease[this.texts[i]], mode);
                 this.tweens.push(tween);
             }
-
         },
         
         update: function() {
-            // Update all entities and backgroundMaps
             this.parent();
 
-            // Update each tween and position
             for (var i = 0; i < this.tweens.length; i++) {
                 this.oPositions[i] = this.tweens[i].value;
             }
+            this.nextDemo();
+            
+        },
 
+        nextDemo(){
             if (ig.input.pressed('action')){
                 ig.scene.set(ig.SecondDemoTweenScene);
             }
         },
         
         draw: function() {
-            // Draw all entities and backgroundMaps
             this.parent();
-
-            var sectionHeight = ig.system.height / 5;
+            
             var x = ig.system.width / 2;
+            this.font.draw(this.header, x, 24, ig.Font.ALIGN.CENTER);
 
-            // Draw Texts for each section
-            // and "O" characters
             for (var i = 0; i < this.texts.length; i++) {
-                var y = (i + 1) * sectionHeight - 16;
-                this.font.draw(this.texts[i], x, y + 12, ig.Font.ALIGN.CENTER);
-                this.font.draw('O', this.oPositions[i], y + 24, ig.Font.ALIGN.CENTER);
+                var y = (i + 1) * this.sectionHeight;
+                this.font.draw(this.texts[i], x, y, ig.Font.ALIGN.CENTER);
+                this.font.draw('O', this.oPositions[i], y + 16, ig.Font.ALIGN.CENTER);
             }
-
-            this.font.draw('1/x', x, 24, ig.Font.ALIGN.CENTER);
         }
     });
 

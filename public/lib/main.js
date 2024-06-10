@@ -4,6 +4,7 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
+	"game.input",
 	'game.scenes',
 	'game.entities.trigger'
 )
@@ -13,8 +14,7 @@ ig.Main = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
-		ig.input.bind( ig.KEY.MOUSE1, 'action' );
-		ig.input.bind( ig.KEY.Z, 'action' );
+		new ig.InputSetup();
 	},
 	
 	run: function() {
@@ -26,8 +26,21 @@ ig.Main = ig.Game.extend({
 	}
 });
 
-// Start the Game with 60fps, a resolution of 320x240, scaled
-// up by a factor of 2
-ig.main( '#canvas', ig.Main, 60, 320, 240, 2 );
+ig.init = function () {
+	ig.init.scaleCanvas();
+	ig.Sound.channels = 2;
+	ig.main("#canvas", ig.Main, 60, 288, 512, 2);
+	window.addEventListener("resize", ig.init.scaleCanvas, !1);
+};
 
+ig.init.scaleCanvas = function () {
+	var width = 288,
+		height = 512,
+		a = document.getElementById("canvas"),
+		b = Math.min(window.innerWidth / width, window.innerHeight / height);
+	a.style.width = width * b + "px";
+	a.style.height = height * b + "px"
+};
+
+return ig.init()
 });

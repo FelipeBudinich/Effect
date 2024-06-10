@@ -2,73 +2,28 @@ ig.module(
     'game.scenes.second-demo-tween'
 )
 .requires(
-    'impact.game',
-    'impact.font',
-    'impact.tween'
+     'game.scenes.first-demo-tween'
 )
 .defines(function(){
     'use strict';
 
-    ig.SecondDemoTweenScene = ig.Game.extend({
+    ig.SecondDemoTweenScene = ig.FirstDemoTweenScene.extend({
         
-        font: new ig.Font('media/04b03.font.png'),
-        tweens: [],
-        oPositions: [],
-
-        init: function() {
-            var screenHeight = ig.system.height;
-            var sectionHeight = screenHeight / 5;
-            var oXStart = (ig.system.width / 12 ) +24;
-            var oXEnd = ((ig.system.width / 12)*11) - 24;
-
-            this.texts = [
-                'Cubic In',
-                'Cubic  Out',
-                'Cubic InOut',
-                'Reference - Linear',
-            ];
-
-            var easingFunctions = [
-                ig.Tween.ease.cubicIn,
-                ig.Tween.ease.cubicOut,
-                ig.Tween.ease.cubicInOut,
-                ig.Tween.ease.linear
-            ];
-
-            for (var i = 0; i < this.texts.length; i++) {
-                var y = (i + 1) * sectionHeight - 16 + 12;
-                this.oPositions.push(oXStart);
-                let tween = new ig.Tween(oXStart, oXEnd, 3, easingFunctions[i], 'oscillate');
-                this.tweens.push(tween);
-            }
-
-        },
-        
-        update: function() {
-            this.parent();
-
-            for (var i = 0; i < this.tweens.length; i++) {
-                this.oPositions[i] = this.tweens[i].value;
-            }
-
+        header: '2/x',
+        texts: [                
+            'linear',
+            'sinusoidalOut',
+            'quadraticOut',
+            'cubicOut',
+            'quarticOut',
+            'quinticOut',
+            'exponentialOut',
+            'circularOut'
+        ],
+        nextDemo(){
             if (ig.input.pressed('action')){
                 ig.scene.set(ig.ThirdDemoTweenScene);
             }
-        },
-        
-        draw: function() {
-            this.parent();
-
-            var sectionHeight = ig.system.height / 5;
-            var x = ig.system.width / 2;
-
-            for (var i = 0; i < this.texts.length; i++) {
-                var y = (i + 1) * sectionHeight - 16;
-                this.font.draw(this.texts[i], x, y + 12, ig.Font.ALIGN.CENTER);
-                this.font.draw('O', this.oPositions[i], y + 24, ig.Font.ALIGN.CENTER);
-            }
-
-            this.font.draw('2/x', x, 24, ig.Font.ALIGN.CENTER);
         }
     });
 

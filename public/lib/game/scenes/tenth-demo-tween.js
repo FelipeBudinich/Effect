@@ -31,7 +31,7 @@ ig.module(
             var easingFunctions = [
                 ig.Tween.ease.deadbounce,
                 ig.Tween.ease.ghost,
-                ig.Tween.ease.clock,
+                ig.Tween.ease.suspense,
                 ig.Tween.ease.linear
             ];
 
