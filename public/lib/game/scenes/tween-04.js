@@ -1,13 +1,13 @@
 ig.module(
-    'game.scenes.fourth-demo-tween'
+    'game.scenes.tween-04'
 )
 .requires(
-     'game.scenes.first-demo-tween'
+     'game.scenes.tween-01'
 )
 .defines(function(){
     'use strict';
 
-    ig.FourthDemoTweenScene = ig.FirstDemoTweenScene.extend({
+    ig.SceneTween_04 = ig.SceneTween_01.extend({
         
         header: '4/x',
         texts: [                
@@ -20,7 +20,7 @@ ig.module(
         ],
         nextDemo(){
             if (ig.input.pressed('action')){
-                ig.scene.set(ig.FifthDemoTweenScene);
+                ig.scene.set(ig.SceneTween_05);
             }
         }
     });

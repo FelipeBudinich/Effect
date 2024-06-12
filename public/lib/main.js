@@ -18,8 +18,8 @@ ig.Main = ig.Game.extend({
 	},
 	
 	run: function() {
-		// Then we go to ig.IntroScene and pass an object to it
-		ig.scene.set(ig.IntroScene, 
+		// Then we go to ig.Intro Scene and pass an object to it
+		ig.scene.set(ig.SceneIntro, 
 			{
 				message: "We passed data to the intro scene\nWait, click, tap or press z to skip"
 			});

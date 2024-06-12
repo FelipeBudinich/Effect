@@ -1,5 +1,5 @@
 ig.module(
-    'game.scenes.first-demo-tween'
+    'game.scenes.tween-01'
 )
 .requires(
     'impact.game',
@@ -9,7 +9,7 @@ ig.module(
 .defines(function(){
     'use strict';
 
-    ig.FirstDemoTweenScene = ig.Game.extend({
+    ig.SceneTween_01 = ig.Game.extend({
         
         // Load a font
         font: new ig.Font('media/04b03.font.png'),
@@ -32,8 +32,8 @@ ig.module(
 
             this.sectionHeight = ig.system.height / 12;
 
-            let start = (ig.system.width / 12 ) + 24;
-            let end = ((ig.system.width / 12) * 11) - 24;
+            let start = (ig.system.width / 12 ) + 36;
+            let end = ((ig.system.width / 12) * 11) - 36;
             let duration = 3;
             let mode = 'oscillate';
 
@@ -61,7 +61,7 @@ ig.module(
 
         nextDemo(){
             if (ig.input.pressed('action')){
-                ig.scene.set(ig.SecondDemoTweenScene);
+                ig.scene.set(ig.SceneTween_02);
             }
         },
         

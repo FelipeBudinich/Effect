@@ -4,16 +4,18 @@ ig.module(
 .requires(
     'game.scenes.manager',
 	'game.scenes.intro',
-    'game.scenes.first-demo-tween',
-    'game.scenes.second-demo-tween',
-    'game.scenes.third-demo-tween',
-    'game.scenes.fourth-demo-tween',
-    'game.scenes.fifth-demo-tween',
-    'game.scenes.sixth-demo-tween',
-    'game.scenes.seventh-demo-tween',
-    'game.scenes.eight-demo-tween',
-    'game.scenes.ninth-demo-tween',
-    'game.scenes.tenth-demo-tween'
+    'game.scenes.tween-01',
+    'game.scenes.tween-02',
+    'game.scenes.tween-03',
+    'game.scenes.tween-04',
+    'game.scenes.tween-05',
+    'game.scenes.tween-06',
+    'game.scenes.tween-07',
+    'game.scenes.tween-08',
+    'game.scenes.tween-09',
+    'game.scenes.tween-10',
+    'game.scenes.tween-11',
+    'game.scenes.tween-12',
 )
 .defines(function(){
     'use strict';

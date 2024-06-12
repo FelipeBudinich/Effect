@@ -9,11 +9,11 @@ ig.module(
 .defines(function(){
     'use strict';
 
-	ig.IntroScene = ig.Game.extend({
+	ig.SceneIntro = ig.Game.extend({
 		// Load a font
 		font: new ig.Font('media/04b03.font.png'),
         timer: new ig.Timer(),
-        // We'll set the value of this.message from main.js when we set ig.IntroScene as the active scene.
+        // We'll set the value of this.message from main.js when we set ig.SceneIntro as the active scene.
 		message: '',
 		
 		init: function() {
@@ -27,7 +27,7 @@ ig.module(
 			this.parent();
 			// If the timer has elapsed then switch the scene
             if (this.timer.delta() >= 0 || ig.input.pressed('action')){
-                ig.scene.set(ig.FirstDemoTweenScene);
+                ig.scene.set(ig.SceneTween_01);
             }
 		},
 		
