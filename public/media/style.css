@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: calc(100vh - env(safe-area-inset-bottom));
+    height: calc(100vh + env(safe-area-inset-bottom));
     overflow: hidden;
 }
 

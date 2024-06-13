@@ -75,13 +75,33 @@ ig.module(
             this.parent();
             
             let x = ig.system.width / 2;
-            this.font.draw(this.currentSet, x, 24, ig.Font.ALIGN.CENTER);
+            this.font.draw(this.currentSet, x, 64, ig.Font.ALIGN.CENTER);
 
             for (let i = 0; i < this.tweens.length; i++) {
                 let y = (i + 1) * this.sectionHeight;
-                this.font.draw(this.easeKeysSubset[i], x, y, ig.Font.ALIGN.CENTER);
-                this.font.draw('O', this.oPositions[i], y + 16, ig.Font.ALIGN.CENTER);
+                this.font.draw(this.easeKeysSubset[i], x, y + 64, ig.Font.ALIGN.CENTER);
+                this.font.draw('O', this.oPositions[i], y + 80, ig.Font.ALIGN.CENTER);
             }
+
+            this.safeZone();
+        },
+
+        safeZone: function(){
+            var ctx = ig.system.context;
+            var margin = 64;
+            // Adjust x and y to center the rectangle
+            var x = margin + (ig.system.realWidth - 2 * margin) / 2;
+            var y = margin + (ig.system.realHeight - 2 * margin) / 2;
+            var width = ig.system.realWidth - 2 * margin; // Canvas width minus twice the margin
+            var height = ig.system.realHeight - 2 * margin; // Canvas height minus twice the margin
+    
+            // Adjust x and y to the top-left corner of the centered rectangle
+            x -= width / 2;
+            y -= height / 2;
+                
+            ctx.strokeStyle = 'red'; // Set the color of the rectangle
+            ctx.lineWidth = 1; // Set the line width of the rectangle
+            ctx.strokeRect(x, y, width, height); // Draw the rectangle outline
         }
     });
 });

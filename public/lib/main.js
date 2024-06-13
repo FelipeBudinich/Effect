@@ -20,30 +20,12 @@ ig.Main = ig.Game.extend({
 	run: function() {
 		this.parent();
 		// Then we go to ig.Intro Scene and pass an object to it
-		//ig.scene.set(ig.SceneIntro, { message: "We passed data to the intro scene\nWait, click, tap or press z to skip" });
+		ig.scene.set(ig.SceneIntro, { message: "We passed data to the intro scene\nWait, click, tap or press z to skip" });
 	},
 
 	draw: function(){
 		this.parent();
-		this.safeZone();
 	},
-	safeZone: function(){
-		var ctx = ig.system.context;
-		var margin = 64;
-		// Adjust x and y to center the rectangle
-		var x = margin + (ig.system.realWidth - 2 * margin) / 2;
-		var y = margin + (ig.system.realHeight - 2 * margin) / 2;
-		var width = ig.system.realWidth - 2 * margin; // Canvas width minus twice the margin
-		var height = ig.system.realHeight - 2 * margin; // Canvas height minus twice the margin
-
-		// Adjust x and y to the top-left corner of the centered rectangle
-		x -= width / 2;
-		y -= height / 2;
-			
-		ctx.strokeStyle = 'red'; // Set the color of the rectangle
-		ctx.lineWidth = 1; // Set the line width of the rectangle
-		ctx.strokeRect(x, y, width, height); // Draw the rectangle outline
-	}
 });
 
 ig.init = function () {
@@ -56,7 +38,7 @@ ig.init = function () {
 
 ig.init.scaleCanvas = function () {
     var canvas = document.getElementById('canvas');
-    var maxCropping = 128; // Max cropping set to 64 pixels per side
+    var maxCropping = 64; // Max cropping set to 64 pixels per side
     var originalWidth = 288;
     var originalHeight = 576;
     var canvasRatio = originalWidth / originalHeight;
