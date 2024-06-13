@@ -9,13 +9,13 @@ html, body {
 
 body {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Take full height of the viewport */
-    width: 100vw; /* Take full width of the viewport */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 #canvas {
     object-fit: cover;
-
 }

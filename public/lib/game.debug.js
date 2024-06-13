@@ -65,7 +65,7 @@ ig.init = function () {
 
 ig.init.scaleCanvas = function () {
     var canvas = document.getElementById('canvas');
-    var maxCropping = 256; // Max cropping set to 64 pixels per side
+    var maxCropping = 128; // Max cropping set to 64 pixels per side
     var originalWidth = 288;
     var originalHeight = 576;
     var canvasRatio = originalWidth / originalHeight;
