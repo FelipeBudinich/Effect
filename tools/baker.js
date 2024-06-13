@@ -34,7 +34,7 @@ class Baker {
         }
       });
 
-      const finalOutput = `//https://github.com/FelipeBudinich/Effect.git\n${minified.code}`;
+      const finalOutput = `ig.baked=true;`;
 
       await outputFile(outFile, finalOutput);
 
