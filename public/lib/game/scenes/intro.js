@@ -27,7 +27,7 @@ ig.module(
 			this.parent();
 			// If the timer has elapsed then switch the scene
             if (this.timer.delta() >= 0 || ig.input.pressed('action')){
-                ig.scene.set(ig.SceneTween_01);
+                ig.scene.set(ig.SceneTween);
             }
 		},
 		
