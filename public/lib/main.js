@@ -51,11 +51,6 @@ ig.init = function () {
 	ig.Sound.channels = 2;
 	ig.main("#canvas", ig.Main, 60, 288, 576, 2);
 	window.addEventListener("resize", ig.init.scaleCanvas, false);
-	if (ig.ua.mobile){
-		document.body.addEventListener('touchmove', function(event) {
-			event.preventDefault();
-		}, { passive: false });
-	}
 };
 
 /*ig.init.scaleCanvas = function () {
@@ -88,7 +83,7 @@ ig.init.scaleCanvas = function () {
         targetHeight = originalHeight * scale;
     } else {
         // Window is taller than the canvas
-        targetHeight = Math.min(window.innerHeight, targetHeight + maxCropping);
+        targetHeight = Math.min(window.innerHeight, targetHeight + (maxCropping*2));
         scale = targetHeight / originalHeight;
         targetWidth = originalWidth * scale;
     }
