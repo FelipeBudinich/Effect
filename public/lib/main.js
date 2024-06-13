@@ -54,15 +54,6 @@ ig.init = function () {
 
 };
 
-/*ig.init.scaleCanvas = function () {
-	var width = 288,
-		height = 576,
-		a = document.getElementById("canvas"),
-		b = Math.min(window.innerWidth / width, window.innerHeight / height);
-	a.style.width = width * b + "px";
-	a.style.height = height * b + "px"
-};*/
-
 ig.init.scaleCanvas = function () {
     var canvas = document.getElementById('canvas');
     var maxCropping = 128; // Max cropping set to 64 pixels per side
