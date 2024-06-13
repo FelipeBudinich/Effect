@@ -50,7 +50,8 @@ ig.init = function () {
 	ig.init.scaleCanvas();
 	ig.Sound.channels = 2;
 	ig.main("#canvas", ig.Main, 60, 288, 576, 2);
-	window.addEventListener("resize", ig.init.scaleCanvas, false);
+	window.addEventListener('resize', () => ig.init.scaleCanvas(), false);
+
 };
 
 /*ig.init.scaleCanvas = function () {
