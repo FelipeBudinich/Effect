@@ -34,7 +34,7 @@ class Baker {
         }
       });
 
-      const finalOutput = `ig.baked=true;`;
+      const finalOutput = `ig={},ig.baked=true;${minified.code}`;
 
       await outputFile(outFile, finalOutput);
 

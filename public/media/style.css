@@ -7,11 +7,15 @@ html, body {
     font-size: 12pt;
 }
 
+body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Take full height of the viewport */
+    width: 100vw; /* Take full width of the viewport */
+}
+
 #canvas {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+    object-fit: cover;
+
 }
